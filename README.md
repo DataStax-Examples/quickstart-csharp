@@ -15,7 +15,7 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
 ## Project Layout
 
 * [Program.cs](/QuickStart/Program.cs) - Skeleton C# application with space to fill in CRUD operation code
-* [QuickStart.csproj](/QuickStart/QuickStart.csproj) - Visual Studio .NET C# Project
+* [QuickStart.csproj](/QuickStart/QuickStart.csproj) - Visual Studio .NET C# Project file
 * [users.cql](/QuickStart/users.cql) - Use this file to create the schema
 
 ## Prerequisites
