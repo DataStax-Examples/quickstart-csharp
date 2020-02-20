@@ -12,6 +12,9 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
 * To demonstrate how to perform basic CRUD operations with the DataStax C# Driver.
 * The intent is to help users get up and running quickly with the driver. 
 
+## How this Sample Works
+This project walks through basic CRUD operations using Cassandra. The demo application will first insert a row of user data, select that same row back out, update the row and finally delete the user. The README includes the code snippets to be filled in to the main application code to complete the functionality.
+
 ## Project Layout
 
 * [Program.cs](/QuickStart/Program.cs) - C# application file with space to fill in CRUD operation code
