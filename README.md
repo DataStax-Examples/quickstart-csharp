@@ -16,7 +16,7 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
 
 * [Program.cs](/QuickStart/Program.cs) - Skeleton C# application with space to fill in CRUD operation code
 * [QuickStart.csproj](/QuickStart/QuickStart.csproj) - Visual Studio .NET C# Project
-* [users.cql](/QuickStart/users.cql) Use this file to create the schema
+* [users.cql](/QuickStart/users.cql) - Use this file to create the schema
 
 ## Prerequisites
   * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
