@@ -3,10 +3,14 @@
 [![Build Status](https://travis-ci.org/beccam/quickstart-csharp.svg?branch=master)](https://travis-ci.org/beccam/quickstart-csharp)
 
 A basic C#/.NET demo CRUD application using the DataStax C# Driver for Apache Cassandra. 
-The intent is to help users get up and running quickly with the driver. 
 If you are having trouble, the complete code solution for `Program.cs` can be found [here](https://gist.github.com/beccam/5abab3b4072d5a0027475481f1d5075f).
 
 Contributors: [Rebecca Mills](https://github.com/beccam)
+
+## Objectives
+
+* To demonstrate how to perform basic CRUD operations with the DataStax C# Driver.
+* The intent is to help users get up and running quickly with the driver. 
 
 ## Prerequisites
   * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
