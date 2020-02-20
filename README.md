@@ -12,6 +12,12 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
 * To demonstrate how to perform basic CRUD operations with the DataStax C# Driver.
 * The intent is to help users get up and running quickly with the driver. 
 
+## Project Layout
+
+* [Program.cs](/QuickStart/Program.cs) - Skeleton C# application with space to fill in CRUD operation code.
+* [QuickStart.csproj](/QuickStart/QuickStart.csproj) - Visual Studio .NET C# Project
+* [users.cql] (/QuickStart/users.cql) Use this file to create the schema
+
 ## Prerequisites
   * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
   * [Mircosoft Visual Studio](https://visualstudio.microsoft.com/vs/) with .NET Core 2.1+
