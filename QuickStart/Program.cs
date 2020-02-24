@@ -1,4 +1,4 @@
-﻿using Cassandra;
+using Cassandra;
 using System.Linq;
 using System;
 
@@ -22,7 +22,7 @@ namespace QuickStart
 
             DeleteUser(session, "Jones");
             
-            cluster.Dispose()
+            cluster.Dispose();
 
         }
 
