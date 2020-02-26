@@ -7,7 +7,8 @@ namespace QuickStart
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
+
             // TO DO: Fill in your own contact point
             Cluster cluster = Cluster.Builder().AddContactPoint("127.0.0.1").Build();
             ISession session = cluster.Connect("demo");
@@ -30,6 +31,9 @@ namespace QuickStart
         {
 
             //TO DO: execute SimpleStatement that inserts one user into the table
+            var statement = new SimpleStatement("INSERT INTO users (lastname, age, city, email, firstname) VALUES (?,?,?,?,?)", lastname, age, city, email, firstname);
+
+            session.Execute(statement);
 
         }
 
@@ -37,23 +41,30 @@ namespace QuickStart
         {
 
             //TO DO: execute SimpleStatement that retrieves one user from the table
+            //TO DO: print firstname and age of user 
+            var statement = new SimpleStatement("SELECT * FROM users WHERE lastname = ?", lastname);
 
-            //TO DO: print firstname and age of user
+            var result = session.Execute(statement).First();
+            Console.WriteLine("{0} {1}", result["firstname"], result["age"]);
 
         }
 
-        public static void UpdateUser(ISession session, int age, String lastname)
+        private static void UpdateUser(ISession session, int age, String lastname)
         {
 
             //TO DO: execute SimpleStatement that updates the age of one user
+            var statement = new SimpleStatement("UPDATE users SET age =? WHERE lastname = ?", age, lastname);
 
+            session.Execute(statement);
         }
 
-        public static void DeleteUser(ISession session, String lastname)
+        private static void DeleteUser(ISession session, String lastname)
         {
 
             //TO DO: execute SimpleStatement that deletes one user from the table
+            var statement = new SimpleStatement("DELETE FROM users WHERE lastname = ?", lastname);
 
+            session.Execute(statement);
         }
 
     }

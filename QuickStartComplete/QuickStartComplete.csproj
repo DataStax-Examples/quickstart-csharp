@@ -9,7 +9,4 @@
     <PackageReference Include="CassandraCSharpDriver" Version="3.10.0" />
     <PackageReference Include="VisualStudio.gitignore" Version="1.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="EmptyClass.cs" />
-  </ItemGroup>
 </Project>
