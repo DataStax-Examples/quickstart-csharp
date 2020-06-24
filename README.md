@@ -1,123 +1,102 @@
-# DataStax C# Driver for Apache Cassandra Quickstart
+# DataStax Desktop - C# Netflix example
+An introduction to using the Cassandra database with well-defined steps to optimize your learning.  Using a Netflix dataset for sample data, your locally running Cassandra database will contain a minimal set of show data for you to customize and experiment with.
 
-[![Build Status](https://travis-ci.org/beccam/quickstart-csharp.svg?branch=master)](https://travis-ci.org/beccam/quickstart-csharp)
-
-A basic C#/.NET demo CRUD application using the DataStax C# Driver for Apache Cassandra. 
-Use the [QuickStartComplete](QuickStartComplete) project if you want to skip the exercise and run the application with the complete code.
-
-Contributors: [Rebecca Mills](https://github.com/beccam)
+Contributors:
+* [Jeff Banks](https://github.com/jeffbanks)
 
 ## Objectives
-
-* To demonstrate how to perform basic CRUD operations with the DataStax C# Driver.
-* The intent is to help users get up and running quickly with the driver. 
-
-## How this Sample Works
-This project walks through basic CRUD operations using Cassandra. The demo application will first insert a row of user data, select that same row back out, update the row and finally delete the user. The README includes the code snippets to be filled in to the main application code to complete the functionality.
+* Leverage DataStax driver APIs for interaction with a local running Cassandra database.
+* Set up a Cassandra Query Language (CQL) session and perform operations such as creating, reading, and writing.
+* Visualize how the CQL is used with builder patterns provided by the DataStax driver APIs.
+* Use the Netflix show dataset as example information across three differently constructed tables.
+* Observe how the partition key along with clustering keys produce an optimized experience.
 
 ## Project Layout
 
-* [Program.cs](/QuickStart/Program.cs) - C# application file with space to fill in CRUD operation code
-* [QuickStart.csproj](/QuickStart/QuickStart.csproj) - Visual Studio .NET C# Project file
-* [users.cql](/QuickStart/users.cql) - Use this file to create the schema
+* [Program.cs](/Netflix/Program.cs) - C# application file demonstrating the capabilities of Cassandra with Netflix examples.
+* [Netflix.csproj](/Netflix/Netflix.csproj) - Visual Studio .NET C# Project file
 
-## Prerequisites
-  * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
-  * [Mircosoft Visual Studio](https://visualstudio.microsoft.com/vs/) with .NET Core 2.1+
-  * IDE Alternatives: [Visual Studio Code](https://code.visualstudio.com/) or [Rider](https://www.jetbrains.com/rider/)
-  
-  
-## Create the keyspace and table
-The `users.cql` file provides the schema used for this project:
+## How this works
+To get started, read the `main()` method of the Program class and follow the steps for interacting with your own Cassandra database.
+The methods invoked by the `main()` method are created to provide
+more flexibility for modifications as you learn.
 
-```sql
-CREATE KEYSPACE demo
-    WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+## Setup and running
 
-CREATE TABLE demo.users (
-    lastname text PRIMARY KEY,
-    age int,
-    city text,
-    email text,
-    firstname text);
+### Prerequisites
+
+* A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
+* [Microsoft Visual Studio](https://visualstudio.microsoft.com/vs/) with .NET Core 2.1+
+* IDE Alternatives: [Visual Studio Code](https://code.visualstudio.com/) or [Rider](https://www.jetbrains.com/rider/)
+
+If running [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites are required. The Cassandra instance is provided with the DataStax
+Desktop stack as part of container provisioning.
+
+If not using DataStax Desktop, spin up your own local instance of Cassandra exposing its address and
+port to align with settings in the `main()` method of the file `Netflix/Program.cs`.
+
+### Running
+Verify your Cassandra database is running in your local container.
+
+Run the C# `main()` method inside the Netflix Program class. View the console output for steps executed and check for the following output:
+
+```
+Creating Primary Table
+Creating Titles By Rating Table
+Creating Titles By Rating Table
+Primary insert query: INSERT INTO demo.netflix_master (title, show_id, cast, country, date_added, description, director, duration, listed_in, rating, release_year, type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+Inserting into Primary Table for 'Life of Jimmy'
+Inserting into Primary Table for 'Pulp Fiction'
+TitlesByDate insert query: INSERT INTO demo.netflix_titles_by_date (title, show_id, release_year, date_added) VALUES (?,?,?,?)
+Inserting into TitlesByDate Table for 'Life of Jimmy'
+Inserting into TitlesByDate Table for 'Pulp Fiction'
+TitlesByRating insert query: INSERT INTO demo.netflix_titles_by_rating (title, show_id, rating) VALUES (?,?,?)
+Inserting into TitlesByRating Table for 'Life of Jimmy'
+Inserting into TitlesByRating Table for 'Pulp Fiction'
+ReadAll From: netflix_master
+
+RECORD: Life of Jimmy, 100000000,  [ Jimmy ],  [ United States ], 2020-06-01, Experiences of a guitar playing DataStax developer,  [ Franky J ], 42 min,  [ Action ], TV-18, 2020, Movie
+
+RECORD: Pulp Fiction, 100000001,  [ John Travolta, Samuel L. Jackson, Uma Thurman, Harvey Keitel, Tim Roth, Amanda Plummer, Maria de Medeiros, Ving Rhames, Eric Stoltz, Rosanna Arquette, Christopher Walken, Bruce Willis ],  [ United States ], 2019-01-19, This
+stylized crime caper weaves together stories ...,  [ Quentin Tarantino ], 154 min,  [ Classic Movies, Cult Movies, Dramas ], R, 1994, Movie
+
+-----
+ReadAll From: netflix_titles_by_date
+
+RECORD: 2020, 2020-06-01, 100000000, Life of Jimmy
+
+RECORD: 2020, 2020-06-01, 100000001, Pulp Fiction
+
+RECORD: 1994, 2019-01-19, 100000001, Pulp Fiction
+
+-----
+ReadAll From: netflix_titles_by_rating
+
+RECORD: TV-18, 100000000, Life of Jimmy
+
+RECORD: R, 100000001, Pulp Fiction
+
+-----
+ReadAll from Primary, Filtering by Title: 'Pulp Fiction'
+
+RECORD: Pulp Fiction, 100000001,  [ John Travolta, Samuel L. Jackson, Uma Thurman, Harvey Keitel, Tim Roth, Amanda Plummer, Maria de Medeiros, Ving Rhames, Eric Stoltz, Rosanna Arquette, Christopher Walken, Bruce Willis ],  [ United States ], 2019-01-19, This
+stylized crime caper weaves together stories ...,  [ Quentin Tarantino ], 154 min,  [ Classic Movies, Cult Movies, Dramas ], R, 1994, Movie
+
+-----
+
+RECORD:  [ Quentin Tarantino ]
+
+-----
+Update of Director in Primary by Show Id: 100000001 and Title: 'Pulp Fiction'
+
+RECORD:  [ Quentin Jerome Tarantino ]
+
 ```
 
-## Connect to your cluster
-
-All of our code is contained in the `Program` class. 
-Note how the main method creates a session to connect to our cluster and runs the CRUD operations against it. 
-Replace the default parameter in `Cluster.Builder()` with your own contact point.
-
-```csharp
-// TO DO: Fill in your own contact point
-Cluster cluster = Cluster.Builder()
-                         .AddContactPoint("127.0.0.1")
-                         .Build();
-ISession session = cluster.Connect("demo");
-```
-
-## CRUD Operations
-Fill the code in the methods that will add a user, get a user, update a user and delete a user from the table with the driver.
-
-### INSERT a user
-```csharp
-private static void SetUser(ISession session, String lastname, int age, String city, String email, String firstname) {
-    
-    //TO DO: execute SimpleStatement that inserts one user into the table
-    var statement = new SimpleStatement("INSERT INTO users (lastname, age, city, email, firstname) VALUES (?,?,?,?,?)", lastname, age, city, email, firstname);
-
-    session.Execute(statement);
-}
-```
-### SELECT a user
-```csharp
- private static void GetUser(ISession session, String lastname){
-
-      //TO DO: execute SimpleStatement that retrieves one user from the table
-      //TO DO: print firstname and age of user
-      var statement = new SimpleStatement("SELECT * FROM users WHERE lastname = ?", lastname);
-      
-      var result = session.Execute(statement).First();
-      Console.WriteLine("{0} {1}", result["firstname"], result["age"]);
-
-}
-```
-
-### UPDATE a user's age
-```csharp
-private static void UpdateUser(ISession session, int age, String lastname) {
-
-    //TO DO: execute SimpleStatement that updates the age of one user
-    var statement = new SimpleStatement("UPDATE users SET age =? WHERE lastname = ?", age, lastname);
-
-    session.Execute(statement);
-}
-```   
-
-### DELETE a user
-```csharp
-private static void DeleteUser(ISession session, String lastname) {
-
-    //TO DO: execute SimpleStatement that deletes one user from the table
-    var statement = new SimpleStatement("DELETE FROM users WHERE lastname = ?", lastname);
-
-    session.Execute(statement);
-}
-```
- ## License
-Copyright 2019 Rebecca Mills
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.   
+## Having trouble?
+Are you getting errors reported but can't figure out what to do next?  Copy your log output, document any details, and head
+over to the [DataStax Community](https://community.datastax.com/spaces/131/datastax-desktop.html) to get some assistance.
 
 
-
+## Questions or comments?
+If you have any questions or want to post a feature request, visit the [Desktop space at DataStax Community](https://community.datastax.com/spaces/131/datastax-desktop.html)
