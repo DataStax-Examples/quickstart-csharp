@@ -68,11 +68,7 @@ namespace Netflix
 
             // 6. Update the Pulp Fiction movie to have the director's full name.
             // Then, show the updated record.
-            // var updatedDirectorList = new List<string>();
-            // updatedDirectorList.Add("Quentin Jerome Tarantino");
-            var updatedDirectorList = new string[1];
-            updatedDirectorList[0] = "Quentin Jerome Tarantino";
-
+            var updatedDirectorList = new List<String>() { "Quentin Jerome Tarantino" };
 
             UpdateDirectorInPrimary(session,
                     SHOW_ID_PULP_FICTION, TITLE_PULP_FICTION, updatedDirectorList);
@@ -123,10 +119,10 @@ namespace Netflix
 
             Console.WriteLine("Primary insert query: {0}", query);
             Console.WriteLine("Inserting into Primary Table for '{0}' ", TITLE_LIFE_OF_JIMMY);
-            var listedInLifeOfJimmy = new List<string>() { "Action" };
-            var countriesLifeOfJimmy = new List<string>() { "United States" };
-            var castLifeOfJimmy = new List<string>() { "Jimmy" };
-            var directorsLifeOfJimmy = new List<string>() { "Franky J" };
+            var listedInLifeOfJimmy = new List<String>() { "Action" };
+            var countriesLifeOfJimmy = new List<String>() { "United States" };
+            var castLifeOfJimmy = new List<String>() { "Jimmy" };
+            var directorsLifeOfJimmy = new List<String>() { "Franky J" };
 
             var preparedStatmentLifeOfJimmy = session.Prepare(query);
             var statementLifeOfJimmy = preparedStatmentLifeOfJimmy.Bind(
@@ -136,13 +132,13 @@ namespace Netflix
             session.Execute(statementLifeOfJimmy);
 
             Console.WriteLine("Inserting into Primary Table for '{0}' ", TITLE_PULP_FICTION);
-            var listedInPulpFiction = new string[] { "Classic Movies", "Cult Movies", "Dramas" };
-            var countriesPulpFiction = new string[] { "United States" };
-            var castPulpFiction = new string[] {"John Travolta", "Samuel L. Jackson", "Uma Thurman", "Harvey Keitel", "Tim Roth",
+            var listedInPulpFiction = new List<String>() { "Classic Movies", "Cult Movies", "Dramas" };
+            var countriesPulpFiction = new List<String>() { "United States" };
+            var castPulpFiction = new List<String>() {"John Travolta", "Samuel L. Jackson", "Uma Thurman", "Harvey Keitel", "Tim Roth",
                             "Amanda Plummer", "Maria de Medeiros", "Ving Rhames", "Eric Stoltz", "Rosanna Arquette", "Christopher Walken",
                             "Bruce Willis"};
 
-            var directorsPulpFiction = new List<string>();
+            var directorsPulpFiction = new List<String>();
             directorsPulpFiction.Add("Quentin Tarantino");
 
             var preparedStatmentPulpFiction = session.Prepare(query);
@@ -215,7 +211,7 @@ namespace Netflix
 
         private static void UpdateDirectorInPrimary(ISession session, Int32 showId,
                                                    String title,
-                                                   String[] directors)
+                                                   List<String> directors)
         {
             Console.WriteLine("Update of Director in Primary by Show Id: {0} and Title: '{1}'", showId, title);
             var query = String.Format("UPDATE {0}.{1} SET director = ? WHERE show_id = ? and title = ? ", KEYSPACE_NAME, TABLE_NETFLIX_PRIMARY);
