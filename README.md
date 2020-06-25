@@ -16,7 +16,7 @@ Contributors:
 ## Project Layout
 
 * [Program.cs](/Netflix/Program.cs) - C# application file demonstrating the capabilities of Cassandra with Netflix examples.
-* [Netflix.csproj](/Netflix/Netflix.csproj) - Visual Studio .NET C# Project file
+* [Netflix.csproj](/Netflix/Netflix.csproj) - Visual Studio .NET C# Project file.
 
 ## How this works
 To get started, read the `main()` method of the Program class and follow the steps for interacting with your own Cassandra database.
