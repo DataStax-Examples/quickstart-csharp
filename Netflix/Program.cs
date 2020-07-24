@@ -92,7 +92,7 @@ namespace Netflix
 
         private static void CreateTitlesByDateTable(ISession session)
         {
-            Console.WriteLine("Creating Titles By Rating Table");
+            Console.WriteLine("Creating Titles By Date Table");
             String query = String.Format("CREATE TABLE IF NOT EXISTS {0}.{1} (show_id int," +
                 " date_added date, release_year int, title text, PRIMARY KEY ((release_year), date_added, show_id)) " +
                 " WITH CLUSTERING ORDER BY (date_added DESC)", KEYSPACE_NAME, TABLE_NETFLIX_TITLES_BY_DATE);

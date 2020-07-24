@@ -38,9 +38,12 @@ If not using DataStax Desktop, spin up your own local instance of Cassandra expo
 port to align with settings in the `main()` method of the file `Netflix/Program.cs`.
 
 ### Running
-Verify your Cassandra database is running in your local container.
+Verify your Cassandra database is running in your local container, then execute these commands or use your IDE to run the C# `main()` method inside the Netflix Program class:
 
-Run the C# `main()` method inside the Netflix Program class. View the console output for steps executed and check for the following output:
+    cd Netflix
+    dotnet run
+
+View the console output for steps executed and check for the following output:
 
 ```
 Creating Primary Table
