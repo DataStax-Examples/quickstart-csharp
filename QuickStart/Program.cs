@@ -21,11 +21,7 @@ namespace QuickStart
             GetUser(session, "Jones");
 
             DeleteUser(session, "Jones");
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 8906a2ad995e108d15ee164d9408b5ee8866c460
             cluster.Dispose();
 
         }
